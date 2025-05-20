@@ -1,21 +1,28 @@
+#include <iosfwd>
 #include <iostream>
-
+#include <stdio.h>
+#include <string>
 using namespace std;
 
-int main() {
-    int N;
-    int num[10]={};
-    cin>>N;
-    while(N!=0){
-        if(N%10==6)num[9]++;
-        else num[N%10]++;
-        N/=10;
+int main()
+{
+    ios::sync_with_stdio(false);
+    cin.tie(NULL);
+    cout.tie(NULL);
+
+    string num;
+    int numArr[10] = {0};
+    int big = 0;
+    cin >> num;
+
+    for (char s : num)
+    {
+        if (s == '6') numArr['9' - '0']++;
+        else numArr[s - '0']++;
     }
-    num[9]++;
-    num[9]/=2;
-        
-    int set=0;
-    for(int i=0 ; i<10;i++) set=max(set,num[i]);
+    numArr[9] = numArr[9]/2 + numArr[9]%2;
+    for (int i : numArr) big = max(big, i);
+    cout << big << "\n";
     
-    cout<<set;
+    return 0;
 }
