@@ -1,23 +1,38 @@
-#include <bits/stdc++.h>
-
+#include <iosfwd>
+#include <iostream>
+#include <stdio.h>
+#include <string>
 using namespace std;
 
-int main() {
-    int n,x,count=0;
-    int arr[1000001]={};
-    cin>>n;
-    for(int i=0;i<n;i++){
-        int temp;
-        cin>>temp;
-        arr[temp]++;
+int numArr[2000001];
+int numArr2[100001];
+
+int main()
+{
+    ios::sync_with_stdio(false);
+    cin.tie(NULL);
+    cout.tie(NULL);
+
+    int n, x;
+    int sol = 0;
+    cin >> n;
+    for (int i = 0; i < n; i++)
+    {
+        cin >> numArr2[i];
+        numArr[numArr2[i]]++;
     }
-    cin>>x;
-    for(int i=0;i< (x + 1) / 2;i++){
-        if (x - i > 1000000) continue; 
-        if(arr[i]>0&&arr[x-i]>0)count+=min(arr[i],arr[x-i]);
+    cin >> x;
+
+    for (int i = 0 ; i < n; i++)
+    {
+        if (x - numArr2[i] >= 0 && numArr[x - numArr2[i]] == 1 && x / numArr2[i] != 2)
+        {
+            sol++;
+            numArr[x - numArr2[i]]--;
+            numArr[numArr2[i]]--;
+        }
     }
-    if (x % 2 == 0 && arr[x / 2] > 1) {
-        count += arr[x / 2] / 2;
-    }
-    cout<<count;
+
+    cout << sol << "\n";
+    return 0;
 }
