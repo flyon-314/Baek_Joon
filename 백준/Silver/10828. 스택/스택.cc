@@ -1,47 +1,64 @@
-#include <bits/stdc++.h>
-
+#include <iosfwd>
+#include <iostream>
+#include <stdio.h>
+#include <string>
 using namespace std;
 
-int main() {
+int stack[10000];
+int top = 0;
+void push(int item)
+{
+    stack[top++] = item;
+}
+int pop()
+{
+    if (top == 0) return -1;
+    else return stack[--top];
+}
+int size()
+{
+    return top;
+}
+int empty()
+{
+    return top == 0;
+}
+
+int main()
+{
+    ios::sync_with_stdio(false);
+    cin.tie(NULL);
+    cout.tie(NULL);
+    
     int n;
     cin >> n;
-
-    vector<int> num;
-    while(n--){
+    for (int i = 0; i < n; i++)
+    {
         string str;
         cin >> str;
-        
-        if(str == "push"){
-            int x;
-            cin >> x;
-
-            num.push_back(x);
+        if (str == "push")
+        {
+            int num;
+            cin >> num;
+            push(num);
         }
-
-        else if(str == "pop"){
-            if(num.empty())
-                cout << -1 <<endl;
-            else {
-                cout << num.back() << endl;
-                num.pop_back();
-            }
-                
+        else if (str == "pop")
+        {
+            cout << pop() << "\n";
         }
-        
-        else if(str == "size"){
-            cout << num.size() << endl;
+        else if (str == "size")
+        {
+            cout << size() << "\n";
         }
-
-        else if(str == "empty"){
-            cout << num.empty() << endl;
+        else if (str == "empty")
+        {
+            cout << empty() << "\n";
         }
-
-        else if(str == "top"){
-            if (num.empty())
-                cout << -1 <<endl;
-            else 
-                cout << num.back() << endl;
+        else
+        {
+            if (top == 0) cout << -1 << "\n";
+            else cout << stack[top - 1] << "\n"; 
         }
-
     }
+    
 }
