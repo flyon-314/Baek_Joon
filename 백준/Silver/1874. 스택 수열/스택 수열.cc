@@ -1,38 +1,55 @@
-#include <bits/stdc++.h>
-
+#include <iosfwd>
+#include <iostream>
+#include <stdio.h>
+#include <string>
+#include <stack>
+#include <vector>
 using namespace std;
 
-int main() {
-    ios::sync_with_stdio(false); 
-    cin.tie(NULL);    
+int main()
+{
+    ios::sync_with_stdio(false);
+    cin.tie(NULL);
+    cout.tie(NULL);
 
-    int n;
+    int n, num = 0 ;
+    stack<int> s;
+    vector <char> v;
     cin >> n;
+    for (int i = 0; i < n; i++)
+    {
+        int inp;
+        cin >> inp;
 
-    int num=1;
-    
-    string str = "";
-    vector <int> arr;
-    vector <char> oper;
-    arr.push_back(0);
-
-    while(n--){
-        int temp;
-        cin >> temp;
-
-        while (num <= temp) {
-            arr.push_back(num++);
-            oper.push_back('+');
+        while (num < inp)
+        {
+            num++;
+            s.push(num);
+            v.push_back('+');
         }
 
-        if ( arr.back() != temp){
-            cout << "NO" << endl;
-            return 0;
+        if (s.top() == inp)
+        {
+            s.pop();
+            v.push_back('-');
         }
-
-        arr.pop_back();
-        oper.push_back('-');
+        else
+        {
+            while (s.top() != inp)
+            {
+                s.pop();
+                if (s.empty())
+                {
+                    cout << "NO\n";
+                    return 0;
+                }
+                v.push_back('-');
+            }    
+        }
+        
     }
-
-    for(char c : oper) cout << c << "\n";
+    for (int i = 0; i < v.size(); i++)
+    {
+        cout << v[i] <<"\n";
+    }
 }
