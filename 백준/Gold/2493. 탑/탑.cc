@@ -1,26 +1,48 @@
-#include <bits/stdc++.h>
+    #include <iosfwd>
+    #include <iostream>
+    #include <stdio.h>
+    #include <string>
+    #include <stack>
+    #include <vector>
+    using namespace std;
 
-using namespace std;
 
-int main() {
-    ios_base :: sync_with_stdio(false); 
-    cin.tie(NULL); 
-    cout.tie(NULL);
-    int N,high;
-    stack <pair<int, int> > tower;
-    cin>>N;
-    for(int i=0;i<N;i++){
-        cin>>high;
-        while(!tower.empty()){
-            if(tower.top().second>high){
-                cout<<tower.top().first<<" ";
-                break;
-            }
-            tower.pop();
-        }
-        if(tower.empty())
-            cout<<"0 ";
-        tower.push(make_pair(i+1,high));
-    }
+    int main()
+    {
+        ios::sync_with_stdio(false);
+        cin.tie(NULL);
+        cout.tie(NULL);
+
+        int n;
+        cin >> n;
         
-}
+        stack<pair<int,int>> s;
+        vector<int> v;
+
+        for (int i = 1 ; i <= n ; i++)
+        {
+            int high;
+            cin >> high;
+
+            while (!s.empty() && s.top().first < high) s.pop();
+
+            if (s.empty())
+            {
+                v.push_back(0);
+                s.push(make_pair(high, i));
+            }
+            else
+            {
+                v.push_back(s.top().second);
+                s.push(make_pair(high, i));
+            }
+            
+        }
+
+        for (int i = 0; i < n; i++)
+        {
+            cout << v[i] << " ";
+        }
+
+        return 0;
+    }
