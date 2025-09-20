@@ -198,7 +198,7 @@ void mirror2 (vector<vector<bool>> &poly)
             lotate(poly5);
         }
 
-        cout << sol << endl;
+        cout << sol << "\n";
         
     }
             
